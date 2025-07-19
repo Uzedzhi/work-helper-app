@@ -1,0 +1,22 @@
+{
+  "name": "Work helper",
+  "short_name": "js13kPWA",
+  "description": "Progressive Web App that lists games submitted to the A-Frame category in the js13kGames 2017 competition.",
+  "icons": [
+    {
+      "src": "icons/iTunesArtwork@1x.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+
+    {
+      "src": "icons/iTunesArtwork@1x1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "theme_color": "#0e3775",
+  "background_color": "#0e3775"
+}
