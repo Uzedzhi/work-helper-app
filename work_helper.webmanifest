@@ -1,7 +1,7 @@
 {
   "name": "Work helper",
   "short_name": "js13kPWA",
-  "description": "Progressive Web App that lists games submitted to the A-Frame category in the js13kGames 2017 competition.",
+  "description": "Ваша помощь в соблюдении дэдлайнов и достижении целей! AI powered",
   "icons": [
     {
       "src": "icons/Icon-App-60x60@3x.png",

@@ -1,27 +1,45 @@
-<!doctype html>
-<html lang="ru-RU">
+<!DOCTYPE html>
+<html lang="ru">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Work helper</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="manifest" href="work_helper.webmanifest" />
+    <title>work helper app</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0;  user-scalable=0;" name="viewport">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="work_helper.webmanifest">
   </head>
-  <body>
-    <h1>Period tracker</h1>
-    <form>
-      <fieldset>
-        <legend>Введите когда закончится ваш дедлайн</legend>
-        <p>
-          <label for="start-date">Дедлайн</label>
-          <input type="date" id="start-date" required />
-        </p>
-      </fieldset>
-      <p>
-        <button type="submit">Добавить</button>
-      </p>
-    </form>
-    <section id="past-periods"></section>
-    <script src="script.js" defer></script>
+  <body width="device-width">
+    <div class="head-panel">
+      <div class="account">
+        <div class="personal">
+          <div class="avatar"></div>
+          <div class="other">
+            <h1 class="name">Uzedzhi</h1>
+            <div>
+              <hr>
+              <img src="images/vector.svg" alt="vector" />
+            </div>
+            <p class="motivation">У тебя все получится!</p>
+          </div>
+        </div>
+        
+        <div class="numbers">
+          <h2>Дедлайнов: none</h2>
+          <h2>Целей: none</h2>
+          <h2>Задач на сегодня: none</h2>
+        </div>
+      </div>
+      <div class="menu">
+        <hr>
+        <div>
+          <h3>Расписание</h3>
+          <div class="vertical-line"></div>
+          <h3>Дедлайны</h3>
+          <div class="vertical-line"></div>
+          <h3>Цели</h3>
+          <hr>
+        </div>
+      </div>
+    </div>
+  <script src="script.js"></script>
   </body>
 </html>
