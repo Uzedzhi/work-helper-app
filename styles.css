@@ -9,6 +9,7 @@ body {
     background: rgba(27, 74, 96, 0.5);
     border-radius: 25px;
     height: 15%;
+    width: 15%;
 }
 .name {
     color: #062D4C;
