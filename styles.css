@@ -9,7 +9,7 @@ body {
     background: rgba(27, 74, 96, 0.5);
     border-radius: 25px;
     height: 20%;
-    border: solid 10px #257FA6 blur(5px);
+    border: solid 10px #085C81 blur(5px);
 }
 .name {
     color: #062D4C;
@@ -37,6 +37,6 @@ body {
 }
 hr{
     margin: 0;
-    border: solid 2px #257FA6;
+    border: solid 2px #085C81;
     filter: blur(15px);
 }
