@@ -6,7 +6,7 @@ body {
     margin: 0;
 }
 .head-panel {
-    background: rgba(27, 74, 96, 0.5);
+    background: rgba(27, 74, 0, 0&5);
     border-radius: 0 0 10px 10px;
 }
 .name {
