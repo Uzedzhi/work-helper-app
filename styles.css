@@ -7,7 +7,6 @@ body {
 }
 .head-panel {
     background: rgba(27, 74, 96, 0.5);
-    border-radius: 25px;
     height: 20%;
     border: solid 10px #085C81 blur(4px);
 }
@@ -17,9 +16,9 @@ body {
     margin: 0 10px;
 }
 .avatar {
-    width: 70px;
     height: 70px;
     background-color: bisque;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: solid 3px #ff8800;
 }
@@ -35,8 +34,32 @@ body {
     margin-bottom: 2px;
     border-color: #ff8800;
 }
-hr{
-    margin: 0;
-    border: solid 2px #085C81;
-    filter: blur(4px);
+.other div {
+    display:flex;
+}
+.block{
+    width: 100%;
+    display: flex;
+}
+.gorisont-line{
+    height: 1px;
+    background-color: #062D4C;
+    filter: blur(1px)
+}
+.block h3{
+    color:#ff8800;
+    font-weight: 300;
+    margin: 0px 10px;
+    text-align: center;
+    flex:1;
+    
+}
+.vertical-line{
+    width: 1px;
+    background-color: #062D4C;
+    filter: blur(1px);
+    
+}
+.numbers {
+    font-size:small;
 }
