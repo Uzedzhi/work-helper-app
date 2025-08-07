@@ -9,12 +9,7 @@ document.addEventListener('wheel', function(e) {
 }, { passive: false });
 
 const swPath = '/work-helper-app/firebase-messaging-sw.js'; // относительный путь
-
-navigator.serviceWorker.register(swPath).then((registration) => {
-  console.log('✅ Firebase SW зарегистрирован');
-
-  // Инициализация Firebase
-  const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDI8ufxr-uyh2BEEM3CqtxivtGtW6yONe0",
     authDomain: "work-helper-app.firebaseapp.com",
     projectId: "work-helper-app",
@@ -23,41 +18,53 @@ navigator.serviceWorker.register(swPath).then((registration) => {
     appId: "1:17581970290:web:aea03338ced9c76c6743eb",
     measurementId: "G-1F10L84NKD"
   };
-  firebase.initializeApp(firebaseConfig);
-  const messaging = firebase.messaging();
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
 
-  // Запрашиваем разрешение
-  Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('🔔 Разрешение на уведомления получено');
+navigator.serviceWorker.register('/work-helper-app/firebase-messaging-sw.js')
+  .then((registration) => {
+    console.log('✅ SW зарегистрирован');
 
-      // Получаем токен, передавая явно регистрацию service worker
-      messaging.getToken({
-        vapidKey: 'BFKbU1VHHoKA2ku0v9ZcgQqo3urfAadSSTY8QAs9PcnzvjnKA6BNPiuPj8JTnCC2jRhJStLUybughDfIuQrFVfk',
-        serviceWorkerRegistration: registration
-      }).then((currentToken) => {
-        if (currentToken) {
-          console.log('🎯 Токен устройства:', currentToken);
-        } else {
-          console.log('⚠️ Токен не получен');
-        }
-      }).catch((err) => {
-        console.error('❌ Ошибка получения токена:', err);
-      });
-    }
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        console.log('🔔 Разрешение получено');
+
+        messaging.getToken({
+          vapidKey: 'BFKbU1VHHoKA2ku0v9ZcgQqo3urfAadSSTY8QAs9PcnzvjnKA6BNPiuPj8JTnCC2jRhJStLUybughDfIuQrFVfk',
+          serviceWorkerRegistration: registration
+        }).then((token) => {
+          if (token) {
+            console.log('🎯 Токен устройства:', token);
+          } else {
+            console.warn('⚠️ Токен не получен');
+          }
+        }).catch((err) => {
+          console.error('❌ Ошибка получения токена:', err);
+        });
+
+      } else {
+        console.warn('❌ Разрешение не получено');
+      }
+    });
   });
-});
 
+const cur = 'online';
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/work-helper-app/service-worker.js').then(registration => {
       console.log('✅ Service Worker зарегистрирован');
 
+      window.addEventListener('offline', () => {
+          cur = 'offline';
+        });
+
       // Обновляем, когда устройство подключается к интернету
-      window.addEventListener('online', () => {
-        console.log('📡 Устройство онлайн. Проверяем обновления...');
-        registration.update();
-      });
+      if (cur === 'offline') {
+        window.addEventListener('online', () => {
+          console.log('📡 Устройство онлайн. Проверяем обновления...');
+          registration.update();
+        });
+      }
 
       // Если найдена новая версия:
       registration.onupdatefound = () => {
