@@ -1,5 +1,5 @@
 body {
-    background: url("/Adobe\ Express\ -\ file.png");
+    background: url("Adobe Express - file.png");
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
@@ -106,4 +106,5 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
+
 }
