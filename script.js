@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/work-helper-app/service-worker.js')
       .then(reg => console.log('✅ Service Worker зарегистрирован'))
-      .catch(err => console.error('❌ Ошибк:', err));
+      .catch(err => console.error('❌ Ошибкa:', err));
   });
 }
 const firebaseConfig = {
@@ -47,4 +47,5 @@ Notification.requestPermission()
       console.log('❌ Уведомления запрещены');
     }
   });
+
 
