@@ -1,8 +1,5 @@
 console.log('Wow its javascript');
 
-document.querySelector("img").addEventListener("", function(e) {
-    e.preventDefault();
-}, {passive: false });
 document.addEventListener('touchmove', function(e) {
   e.preventDefault();
 }, { passive: false });

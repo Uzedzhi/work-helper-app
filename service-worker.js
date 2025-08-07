@@ -6,7 +6,9 @@ const urlsToCache = [
     '/Adobe Express - file.png',
     '/Group 29.png',
     '/script.js',
-    '/images/'
+    '/images/Group 12 (2).svg',
+    'work_helper.webmanifest',
+    '/images/Group 30.svg'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(
