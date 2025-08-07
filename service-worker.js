@@ -25,3 +25,11 @@ self.addEventListener('fetch', event => {
     })
   );
 });
+self.addEventListener('install', event => {
+  self.skipWaiting();
+});
+
+// Применяй ко всем открытым вкладкам
+self.addEventListener('activate', event => {
+  clients.claim();
+});

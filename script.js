@@ -10,9 +10,30 @@ document.addEventListener('wheel', function(e) {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/work-helper-app/service-worker.js')
-      .then(reg => console.log('✅ Service Worker зарегистрирован'))
-      .catch(err => console.error('❌ Ошибкa:', err));
+    navigator.serviceWorker.register('/work-helper-app/service-worker.js').then(registration => {
+      console.log('✅ Service Worker зарегистрирован');
+
+      // Обновляем, когда устройство подключается к интернету
+      window.addEventListener('online', () => {
+        console.log('📡 Устройство онлайн. Проверяем обновления...');
+        registration.update();
+      });
+
+      // Если найдена новая версия:
+      registration.onupdatefound = () => {
+        const newWorker = registration.installing;
+        newWorker.onstatechange = () => {
+          if (newWorker.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              console.log('🆕 Доступно обновление');
+
+              // Покажем диалог (можно заменить на auto reload)
+              window.location.reload();
+            }
+          }
+        };
+      };
+    });
   });
 }
 const firebaseConfig = {
@@ -47,5 +68,3 @@ Notification.requestPermission()
       console.log('❌ Уведомления запрещены');
     }
   });
-
-
