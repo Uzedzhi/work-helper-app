@@ -1,41 +1,65 @@
 body {
-    background: url("Adobe Express - file.png");
+    background: url("/Adobe\ Express\ -\ file.png");
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
     margin: 0;
 }
+
+.bg-svg-leaf, .bg-svg-leaf2{
+    position: fixed;
+    z-index: -1;
+    filter:drop-shadow(0 0 10px #3891B7) drop-shadow(0 0 10px #3891B7) ;
+}
+.bg-svg{
+    z-index: -1;
+    position: fixed;
+    min-height: 100vh;
+    min-width: 100vw;
+    right: 0px;
+    bottom: -16px;
+    pointer-events: none;
+    filter: blur(1.5px);
+}
+.bg-svg-leaf{
+    transform: rotate(15deg);
+    right: -140px;
+    top: 208px;
+}
+.bg-svg-leaf2{
+    transform: rotate(90deg);
+    bottom: 114px;
+    left: -140px;
+}
 .head-panel {
+    position: relative;
     background: rgba(27, 74, 96, 0.5);
-    height: 20%;
+    height: 15vh;
     border: solid 10px #085C81 blur(4px);
+}
+.account, .personal{
+    display: flex;
+}
+.rhombus{
+    filter: drop-shadow(0 0 1.5px #dd6600);
 }
 .name {
     color: #062D4C;
     font-size: 32px;
+    text-align:left;
     margin: 0 10px;
 }
 .avatar {
     height: 70px;
-    background-color: bisque;
+    background-color:  bisque;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: solid 3px #ff8800;
 }
-.account, .personal {
-    display: flex;
-}
 .motivation {
     margin: 0 10px;
     color: #ff8800;
-}
-.other hr {
-    margin: 0;
-    margin-bottom: 2px;
-    border-color: #ff8800;
-}
-.other div {
-    display:flex;
+    white-space: nowrap;
 }
 .block{
     width: 100%;
@@ -46,20 +70,40 @@ body {
     background-color: #062D4C;
     filter: blur(1px)
 }
-.block h3{
+.block button{
     color:#ff8800;
     font-weight: 300;
-    margin: 0px 10px;
+    margin: 0px 0px;
+    padding: 4px 10px;
     text-align: center;
+    background: rgba(0, 0, 0, 0);
+    border: none;
     flex:1;
-    
+}
+.block button:active{
+    background-color: rgba(27, 74, 96, 0.2);
 }
 .vertical-line{
     width: 1px;
     background-color: #062D4C;
     filter: blur(1px);
-    
+    margin: 4px 0;
 }
-.numbers {
-    font-size:small;
+.numbers p{
+    margin: 0;
+}
+.line{
+    align-items: center;
+    display:flex;
+}
+.line div{
+    height: 2px;
+    width: 100%;
+    background-color: #ff8800;
+    filter: drop-shadow(0px 0px 1.5px #dd6600);
+}
+.menu{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

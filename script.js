@@ -1,8 +1,8 @@
 console.log('Wow its javascript');
 
-document.querySelector("h1").addEventListener("click", () => {
-    alert("Hi");
-});
+document.querySelector("img").addEventListener("", function(e) {
+    e.preventDefault();
+}, {passive: false });
 document.addEventListener('touchmove', function(e) {
   e.preventDefault();
 }, { passive: false });
@@ -10,3 +10,11 @@ document.addEventListener('touchmove', function(e) {
 document.addEventListener('wheel', function(e) {
   e.preventDefault();
 }, { passive: false });
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('✅ Service Worker зарегистрирован'))
+      .catch(err => console.error('❌ Ошибка:', err));
+  });
+}
