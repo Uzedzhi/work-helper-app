@@ -8,45 +8,66 @@ document.addEventListener('wheel', function(e) {
   e.preventDefault();
 }, { passive: false });
 
-const swPath = '/work-helper-app/firebase-messaging-sw.js'; // относительный путь
-const firebaseConfig = {
-    apiKey: "AIzaSyDI8ufxr-uyh2BEEM3CqtxivtGtW6yONe0",
-    authDomain: "work-helper-app.firebaseapp.com",
-    projectId: "work-helper-app",
-    storageBucket: "work-helper-app.firebasestorage.app",
-    messagingSenderId: "17581970290",
-    appId: "1:17581970290:web:aea03338ced9c76c6743eb",
-    measurementId: "G-1F10L84NKD"
-  };
-firebase.initializeApp(firebaseConfig);
-const messaging = firebase.messaging();
 
-navigator.serviceWorker.register('/work-helper-app/firebase-messaging-sw.js')
-  .then((registration) => {
-    console.log('✅ SW зарегистрирован');
 
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        console.log('🔔 Разрешение получено');
 
-        messaging.getToken({
-          vapidKey: 'BFKbU1VHHoKA2ku0v9ZcgQqo3urfAadSSTY8QAs9PcnzvjnKA6BNPiuPj8JTnCC2jRhJStLUybughDfIuQrFVfk',
-          serviceWorkerRegistration: registration
-        }).then((token) => {
-          if (token) {
-            console.log('🎯 Токен устройства:', token);
-          } else {
-            console.warn('⚠️ Токен не получен');
-          }
-        }).catch((err) => {
-          console.error('❌ Ошибка получения токена:', err);
-        });
 
-      } else {
-        console.warn('❌ Разрешение не получено');
-      }
-    });
+
+
+
+
+
+// VAPID public key из шага 2
+const publicVapidKey = 'BEmCtGNaMk_6pFhZqX_Fp9_oRDjv04edkjvCZ-XprWe4Yt0fC5Xk-e-hDba6lu2NMTpKOfxj6eDK_a7pZ51Me-Y';
+
+// Конвертер из base64 в Uint8Array
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = atob(base64);
+  return Uint8Array.from(rawData.split('').map(char => char.charCodeAt(0)));
+}
+
+// Регистрация SW и подписка на Push
+document.addEventListener('DOMContentLoaded', () => {
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+    registerAndSubscribe().catch(console.error);
+  }
+});
+
+async function registerAndSubscribe() {
+  // 1) Регистрируем SW
+  const swReg = await navigator.serviceWorker.register('service-worker.js');
+  console.log('SW зарегистрирован:', swReg);
+
+  // 2) Запрашиваем разрешение
+  let permission = Notification.permission;
+  if (permission === 'default') permission = await Notification.requestPermission();
+  if (permission !== 'granted') return console.warn('Нет разрешения на уведомления');
+
+  // 3) Подписываемся на Push
+  const subscription = await swReg.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
   });
+  console.log('Подписка:', subscription);
+
+  // 4) Отправляем подписку на сервер
+  await fetch('http://localhost:4000/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(subscription)
+  });
+}
+
+
+
+
+
+
+
+
+
 
 const cur = 'online';
 if ('serviceWorker' in navigator) {
