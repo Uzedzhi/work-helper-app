@@ -72,12 +72,6 @@ async function registerAndSubscribe() {
 const cur = 'online';
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/work-helper-app/service-worker.js').then(registration => {
-      console.log('✅ Service Worker зарегистрирован');
-
-      window.addEventListener('offline', () => {
-          cur = 'offline';
-        });
 
       // Обновляем, когда устройство подключается к интернету
       if (cur === 'offline') {
@@ -102,5 +96,4 @@ if ('serviceWorker' in navigator) {
         };
       };
     });
-  });
-}
+  };
