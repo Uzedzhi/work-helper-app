@@ -62,7 +62,7 @@ async function initPush() {
   // 4) Создаём новую подписку
   subscription = await swReg.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
   });
   console.log('[Push] Новая подписка:', subscription);
 
